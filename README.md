@@ -14,20 +14,32 @@ The project follows a Monorepo pattern to keep the codebase clean and maintainab
 Plaintext
 
 ceylonetourify/
-├── client/ # Frontend (React + Vite)
+├── client/ # FRONTEND (React + Vite)
+│ ├── public/ # Static files (Favicon, robots.txt)
 │ ├── src/
-│ │ ├── components/ # Reusable UI components (Navbar, Footer, etc.)
-│ │ ├── pages/ # Page-level components (Home, Gallery, Tours)
-│ │ └── assets/ # Static assets (logos, icons)
-│ └── package.json
-├── server/ # Backend (Node + Express)
-│ ├── models/ # Database schemas (Mongoose)
-│ ├── routes/ # API endpoint definitions
-│ ├── controllers/ # Route logic & business rules
-│ └── index.js # Server entry point
-├── .env # Environment variables (DB keys, API secrets)
-├── .gitignore # Files excluded from Version Control
-└── package.json # Root configuration for running both apps
+│ │ ├── assets/ # Images, Global CSS (Tailwind)
+│ │ ├── components/ # Reusable UI (Navbar, Footer, Buttons)
+│ │ ├── pages/ # Full Pages (Home.jsx, Gallery.jsx, Tours.jsx)
+│ │ ├── api/ # Axios configurations & API calls
+│ │ ├── App.jsx # Main Application Logic
+│ │ └── main.jsx # Entry point for React
+│ ├── .gitignore # (Standard Vite ignore)
+│ ├── index.html # Main HTML file
+│ ├── package.json # Frontend dependencies (Axios, React Router)
+│ └── vite.config.js # Vite configuration
+│
+├── server/ # BACKEND (Node + Express)
+│ ├── controllers/ # Logic for your routes (Get Tours, Add Tour)
+│ ├── models/ # Database Schemas (Tour.js, Gallery.js)
+│ ├── routes/ # API route definitions
+│ ├── middleware/ # Auth/File Upload (Multer) logic
+│ ├── .env # MONGO_URI, CLOUDINARY_KEYS (Keep Secret!)
+│ ├── index.js # Main Express Entry Point
+│ └── package.json # Backend dependencies (Mongoose, Express)
+│
+├── .gitignore # ROOT IGNORE (Blocks node_modules, .env)
+├── package.json # ROOT BRAIN (Runs both apps with Concurrently)
+└── README.md # Project documentation for GitHub
 
 🛠️ Getting Started
 Prerequisites
