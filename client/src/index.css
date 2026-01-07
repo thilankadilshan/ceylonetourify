@@ -18,3 +18,24 @@
     @apply font-sans bg-[#FAFAFA] text-gray-900;
   }
 }
+@layer utilities {
+  .italic-text {
+    /* Giving the italic text a golden gradient */
+    background: linear-gradient(to right, #d4af37, #f3e5ab);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @keyframes pulse-slow {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+  .animate-pulse-slow {
+    animation: pulse-slow 10s ease-in-out infinite;
+  }
+}

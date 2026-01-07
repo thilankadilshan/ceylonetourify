@@ -1,14 +1,18 @@
 import React from "react";
 import Hero from "../sections/home/Hero";
-import AboutCeylon from "../sections/home/AboutCeylon";
-// We will add more sections as we go
+// Import the new component
+import FeaturesGrid from "../sections/home/FeaturesGrid";
+// Keep your temporary About section for later use or delete it
+// import AboutCeylon from '../sections/home/AboutCeylon';
 
 const Home = () => {
   return (
     <main className="overflow-hidden bg-[#FAFAFA]">
       <Hero />
-      <AboutCeylon />
-      {/* FeaturedTours will go here later */}
+      {/* Add the new section here */}
+      <FeaturesGrid />
+
+      {/* <AboutCeylon /> */}
     </main>
   );
 };
