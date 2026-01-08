@@ -7,7 +7,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  // Change background opacity on scroll
+  // Change background opacity and color on scroll
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -18,9 +18,10 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Tours", path: "/tours" },
+    { name: "Tour Packages", path: "/tours" },
     { name: "Gallery", path: "/gallery" },
-    { name: "Contact", path: "/contact" },
+    { name: "About Us", path: "/about" },
+    { name: "Contact Us", path: "/contact" },
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -28,51 +29,40 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed w-full z-[100] transition-all duration-500 ${
-        scrolled ? "bg-white shadow-lg py-3" : "bg-transparent py-5"
+        scrolled ? "bg-primary shadow-2xl py-3" : "bg-transparent py-6"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex justify-between items-center">
-          {/* Logo Section */}
+          {/* Logo Section - Now Square and Single Line */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 md:w-12 md:h-12 overflow-hidden rounded-full border-2 border-secondary/30 transition-transform group-hover:scale-110">
-              {/* Pointing to your favicon folder */}
+            <div className="w-10 h-10 md:w-12 md:h-12 overflow-hidden transition-transform group-hover:scale-105">
               <img
                 src="/assets/logo.png"
                 alt="CeyloneTourify Logo"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
-            <div className="flex flex-col">
-              <span
-                className={`text-xl md:text-2xl font-serif font-bold tracking-tight leading-none transition-colors ${
-                  scrolled ? "text-primary" : "text-white"
-                }`}
-              >
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-xl md:text-2xl font-serif font-bold tracking-tighter text-white">
                 CEYLONE
               </span>
-              <span
-                className={`text-[9px] md:text-[10px] font-sans tracking-[0.3em] uppercase font-bold transition-colors ${
-                  scrolled ? "text-secondary" : "text-secondary/90"
-                }`}
-              >
+              <span className="text-sm md:text-base font-sans tracking-[0.2em] uppercase font-light text-secondary">
                 Tourify
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-10">
+          <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className={`text-xs uppercase tracking-[0.2em] font-semibold transition-all hover:text-secondary ${
-                  scrolled ? "text-gray-700" : "text-white"
-                } ${
+                className={`text-[11px] uppercase tracking-[0.2em] font-bold transition-all hover:text-secondary text-white ${
                   isActive(link.path)
-                    ? "text-secondary border-b border-secondary pb-1"
-                    : ""
+                    ? "text-secondary border-b-2 border-secondary pb-1"
+                    : "opacity-90 hover:opacity-100"
                 }`}
               >
                 {link.name}
@@ -81,7 +71,7 @@ const Navbar = () => {
 
             <a
               href="tel:+94771234567"
-              className="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-sm text-xs uppercase tracking-widest hover:bg-[#1f3f1b] transition-all shadow-md"
+              className="flex items-center gap-2 bg-secondary text-primary px-6 py-2.5 rounded-sm text-xs uppercase tracking-widest font-bold hover:bg-white transition-all shadow-lg active:scale-95"
             >
               <Phone size={14} />
               Book Now
@@ -89,43 +79,57 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <div className="md:hidden flex items-center">
+          <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`transition-colors ${
-                scrolled ? "text-primary" : "text-white"
-              }`}
+              className="text-white transition-colors"
             >
-              {isOpen ? <X size={30} /> : <Menu size={30} />}
+              {isOpen ? <X size={32} /> : <Menu size={32} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Professional Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-primary z-[-1] transition-transform duration-500 ease-in-out md:hidden ${
-          isOpen ? "translate-y-0" : "-translate-y-full"
+        className={`fixed inset-0 bg-primary/98 backdrop-blur-lg z-[-1] transition-all duration-500 ease-in-out lg:hidden ${
+          isOpen
+            ? "opacity-100 visible"
+            : "opacity-0 invisible pointer-events-none"
         }`}
       >
-        <div className="flex flex-col items-center justify-center h-full space-y-8 px-6 text-center">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.path}
-              onClick={() => setIsOpen(false)}
-              className="text-2xl font-serif text-white hover:text-secondary transition-colors italic"
+        <div className="flex flex-col items-center justify-center h-full space-y-10 px-6">
+          <div className="space-y-6 text-center">
+            {navLinks.map((link, index) => (
+              <Link
+                key={link.name}
+                to={link.path}
+                onClick={() => setIsOpen(false)}
+                className={`block text-3xl font-serif text-white hover:text-secondary transition-all transform ${
+                  isOpen
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-10 opacity-0"
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+
+          <div className="w-16 h-[1px] bg-secondary/40"></div>
+
+          <div className="text-center space-y-6 w-full max-w-xs">
+            <p className="text-secondary/80 text-[10px] tracking-[0.4em] uppercase font-bold">
+              Experience Authentic Ceylon
+            </p>
+            <a
+              href="tel:+94771234567"
+              className="block w-full bg-secondary text-primary py-4 rounded-sm uppercase tracking-widest font-black shadow-xl"
             >
-              {link.name}
-            </Link>
-          ))}
-          <div className="w-12 h-[1px] bg-secondary/30"></div>
-          <p className="text-white/60 text-xs tracking-widest uppercase">
-            Ayubowan - Welcome to Ceylon
-          </p>
-          <button className="w-full border-2 border-secondary text-secondary py-4 rounded-sm uppercase tracking-widest font-bold">
-            Call a Guide
-          </button>
+              Book Your Tour
+            </a>
+          </div>
         </div>
       </div>
     </nav>
