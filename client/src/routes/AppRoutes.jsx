@@ -2,30 +2,42 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home";
+import NotFound from "../pages/NotFound"; // Import the new page
 
-// Placeholder pages for now
+// Placeholder pages
 const Tours = () => (
-  <div className="pt-24 text-center">Tours Page (Coming Soon)</div>
+  <div className="pt-24 text-center h-screen bg-background">
+    Tours Page (Coming Soon)
+  </div>
 );
 const Contact = () => (
-  <div className="pt-24 text-center">Contact Page (Coming Soon)</div>
+  <div className="pt-24 text-center h-screen bg-background">
+    Contact Page (Coming Soon)
+  </div>
 );
-const NotFound = () => (
-  <div className="pt-24 text-center">404 - Page Not Found</div>
+const Gallery = () => (
+  <div className="pt-24 text-center h-screen bg-background">
+    Gallery Page (Coming Soon)
+  </div>
+);
+const About = () => (
+  <div className="pt-24 text-center h-screen bg-background">
+    About Page (Coming Soon)
+  </div>
 );
 
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Public Routes using the Main Layout */}
       <Route element={<MainLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/tours" element={<Tours />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
       </Route>
 
-      {/* You can add /admin routes here later without the MainLayout */}
-
+      {/* 404 Route - Outside of MainLayout for full-screen impact */}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

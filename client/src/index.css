@@ -39,3 +39,26 @@
     animation: pulse-slow 10s ease-in-out infinite;
   }
 }
+
+@keyframes slide-up {
+  0% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+  50% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  51% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.8s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
